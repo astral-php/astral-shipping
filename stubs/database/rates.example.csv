@@ -1,0 +1,10 @@
+method_code,country,min_weight_g,max_weight_g,price_eur,estimated_days
+colissimo_home,FR,0,500,5.20,2
+colissimo_home,FR,501,1000,6.80,2
+colissimo_home,FR,1001,2000,8.10,2
+colissimo_pickup,FR,0,1000,4.60,3
+colissimo_pickup,FR,1001,3000,6.20,3
+mondial_relay,FR,0,500,3.90,3
+mondial_relay,FR,501,1000,4.90,3
+mondial_relay,FR,1001,3000,6.50,3
+mondial_relay,BE,0,1000,5.50,4
