@@ -5,6 +5,25 @@ Toutes les versions notables de ce projet sont documentées ici.
 Le format s’inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versionnage Sémantique](https://semver.org/lang/fr/).
 
+## [0.5.0] — 2026-10-23
+
+### Ajouté
+- `CsvRateParser` : parsing CSV testable (virgule décimale, commentaires `#`, pays vide → `*`).
+- Doc [`docs/widgets-pickup.md`](docs/widgets-pickup.md) — guide widgets Mondial Relay / Colissimo + checklist boutique.
+- CSV d’exemple enrichi (FR / BE / DE, tranches étendues, `mondial_relay_home`).
+- Profils documentés dans `stubs/config/shipping.example.php` (MVP / Colissimo+MR / Sendcloud).
+- Tests : import CSV, edge cases barèmes (pays absent, seuil franco, pickup Colissimo, MR domicile).
+
+### Modifié
+- `ImportRatesCommand` délègue le parsing à `CsvRateParser`.
+- README : statut **0.5.0** (barèmes Colissimo / MR matures) ; limites mises à jour.
+- Lien widgets depuis `colissimo-mondial-relay.md` et le partial `options.php`.
+
+### Notes de publication
+- Tag **`0.5.0`** (sans `v`) — Colissimo + Mondial Relay **prêts prod barèmes**.
+- Widgets JS et admin import restent hors package (shop).
+- Agrégateur Sendcloud mature → cible **1.0.0** (après spike).
+
 ## [0.1.0] — 2026-10-11
 
 ### Ajouté

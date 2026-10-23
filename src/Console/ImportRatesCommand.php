@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AstralShipping\Console;
 
 use AstralShipping\Dao\ShippingRateDao;
+use AstralShipping\Rate\CsvRateParser;
 use Core\Console\CommandInterface;
 use Core\Console\Console;
 
@@ -15,8 +16,11 @@ use Core\Console\Console;
  */
 final class ImportRatesCommand implements CommandInterface
 {
-    public function __construct(private ShippingRateDao $rates, private \PDO $pdo)
-    {
+    public function __construct(
+        private ShippingRateDao $rates,
+        private \PDO $pdo,
+        private CsvRateParser $parser = new CsvRateParser(),
+    ) {
     }
 
     public function getName(): string
@@ -36,34 +40,23 @@ final class ImportRatesCommand implements CommandInterface
 
         if ($file === '' || !is_readable($file)) {
             echo "Usage : php bin/console shipping:rates:import <fichier.csv> [--replace]\n";
+
             return 1;
         }
 
-        $handle = fopen($file, 'rb');
-        $header = fgetcsv($handle, 0, ',', '"', '');
-        $expected = ['method_code', 'country', 'min_weight_g', 'max_weight_g', 'price_eur', 'estimated_days'];
-        if ($header === false || array_slice($header, 0, 5) !== array_slice($expected, 0, 5)) {
-            fclose($handle);
-            echo "En-tête CSV invalide. Attendu : " . implode(',', $expected) . "\n";
+        try {
+            $rows = $this->parser->parseFile($file);
+        } catch (\InvalidArgumentException $e) {
+            echo $e->getMessage() . "\n";
+
             return 1;
         }
 
-        $rows = [];
-        while (($line = fgetcsv($handle, 0, ',', '"', '')) !== false) {
-            if ($line === [null] || count($line) < 5) {
-                continue;
-            }
-            $rows[] = [
-                'method_code'    => trim($line[0]),
-                'country_code'   => strtoupper(trim($line[1])) ?: '*',
-                'min_weight_g'   => (int) $line[2],
-                'max_weight_g'   => (int) $line[3],
-                'price_cents'    => (int) round((float) str_replace(',', '.', $line[4]) * 100),
-                'estimated_days' => isset($line[5]) && $line[5] !== '' ? (int) $line[5] : null,
-                'active'         => 1,
-            ];
+        if ($rows === []) {
+            echo "Aucune ligne de tarif à importer.\n";
+
+            return 1;
         }
-        fclose($handle);
 
         $this->pdo->beginTransaction();
         try {
@@ -80,10 +73,12 @@ final class ImportRatesCommand implements CommandInterface
         } catch (\Throwable $e) {
             $this->pdo->rollBack();
             echo 'Import annulé : ' . $e->getMessage() . "\n";
+
             return 1;
         }
 
         $console->success(count($rows) . ' tarif(s) importé(s).');
+
         return 0;
     }
 }

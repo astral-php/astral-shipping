@@ -7,9 +7,9 @@ Frais de port **multi-options** pour [Astral](https://github.com/astral-php) : f
 [![Tests](https://img.shields.io/badge/tests-PHPUnit%2010%2B-9933CC)](./phpunit.xml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> **Statut : 0.1.0 — MVP.** Publiable sur Packagist.  
+> **Statut : 0.5.0** — Colissimo + Mondial Relay **prêts prod barèmes**.  
 > Philosophie Astral : **explicite, sans magie, opt-in** — tu déclares les méthodes actives, rien n’est découvert automatiquement.  
-> Ce n’est **pas** une version 1.0 : voir [Limites MVP](#limites-mvp-010).
+> Ce n’est **pas** une version 1.0 (agrégateur API) : voir [Limites](#limites-050).
 
 ## Compatibilité
 
@@ -19,15 +19,15 @@ Frais de port **multi-options** pour [Astral](https://github.com/astral-php) : f
 
 Le **domaine** (calcul des offres) n’a aucune dépendance au core : seuls le ServiceProvider, les DAOs et la commande console en ont.
 
-## Limites MVP (0.1.0)
+## Limites (0.5.0)
 
 | Sujet | Réalité |
 | --- | --- |
 | Colissimo / Mondial Relay | **Barèmes contrat** (`shipping_rates` / CSV) — pas d’API transporteur officielle |
-| Grilles tarifaires | **Non incluses** (dépendent de ton contrat ; CSV d’exemple fictif) |
-| Points relais | Le package exige `pickup_point_id` ; le **widget** navigateur reste à brancher (doc transporteur) |
-| Sendcloud | API **v2** optionnelle (`SENDCLOUD_*`) — panne isolée, autres méthodes restent |
-| Boutique | Intégré dans **Astral Shop** (profil standard : forfait + retrait) ; profils avancés = backlog shop |
+| Grilles tarifaires | **Non incluses** (contrat ; CSV d’exemple fictif enrichi FR/BE/DE) |
+| Points relais | `pickup_point_id` obligatoire côté serveur ; **widget** = guide [`docs/widgets-pickup.md`](docs/widgets-pickup.md) (hors package) |
+| Sendcloud | API **v2** opt-in MVP — maturité cible **1.0.0** |
+| Boutique | Shop profil standard = forfait + retrait ; profil Colissimo/MR = intégration shop (poids, widgets) |
 
 ## Installation
 
@@ -94,13 +94,17 @@ Modèle : `stubs/config/shipping.example.php`.
 ],
 ```
 
-**Méthodes avancées** (à activer explicitement + barèmes / clés) :
+**Profil Colissimo + Mondial Relay (0.5.0)** — activer explicitement + importer les barèmes :
 
 ```php
-'methods' => ['flat_rate', 'store_pickup', 'colissimo_home', 'colissimo_pickup', 'mondial_relay', 'sendcloud'],
-'rates_source' => 'database', // ou 'config' + tableau 'rates'
-'sendcloud' => ['cache_ttl' => 3600, 'markup_cents' => 0, 'carriers' => null],
+'methods' => [
+    'flat_rate', 'store_pickup',
+    'colissimo_home', 'colissimo_pickup', 'mondial_relay',
+],
+'rates_source' => 'database', // php bin/console shipping:rates:import … --replace
 ```
+
+Widgets relais : [`docs/widgets-pickup.md`](docs/widgets-pickup.md). Sendcloud reste opt-in (voir stub config).
 
 ## Les méthodes disponibles
 
@@ -115,7 +119,7 @@ Modèle : `stubs/config/shipping.example.php`.
 | `sendcloud` | `SendcloudMethod` | API Sendcloud (N offres, cache) | Selon l'offre |
 | *(la tienne)* | `ShippingMethodInterface` | À toi de voir | — |
 
-Pourquoi des barèmes pour Colissimo et Mondial Relay ? Parce que **tes tarifs dépendent de ton contrat** : on les saisit (ou importe en CSV) une fois, le calcul reste instantané, hors-ligne et testable. Voir [`docs/colissimo-mondial-relay.md`](docs/colissimo-mondial-relay.md).
+Pourquoi des barèmes pour Colissimo et Mondial Relay ? Parce que **tes tarifs dépendent de ton contrat** : on les saisit (ou importe en CSV) une fois, le calcul reste instantané, hors-ligne et testable. Voir [`docs/colissimo-mondial-relay.md`](docs/colissimo-mondial-relay.md) et [`docs/widgets-pickup.md`](docs/widgets-pickup.md).
 
 ## Utilisation
 
@@ -189,6 +193,7 @@ src/
   Contract/                     # ShippingMethodInterface, RateLookupInterface, HttpClientInterface
   Method/                       # FlatRate, StorePickup, TableRate, Colissimo, MondialRelay, Sendcloud
   Rate/ArrayRateTable.php       # barème en mémoire (config / tests)
+  Rate/CsvRateParser.php        # parsing CSV (commande import + tests)
   Dao/                          # ShippingRateDao, OrderShipmentDao (AbstractDao)
   Service/                      # ShippingCalculator, ShippingService
   Models/                       # Address, ShippingContext, ShippingQuote, Rate, PickupPoint, ShippingSelection…
@@ -211,7 +216,7 @@ composer install
 composer test
 ```
 
-La suite couvre le calcul (forfait, seuil de gratuité, barèmes, priorité pays), `SendcloudMethod` (client HTTP factice, cache, filtres), le calculateur (tri, doublons, isolation des pannes) et la sélection (point relais obligatoire, prix recalculé). **25 tests** (2026-10).
+La suite couvre le calcul (forfait, seuil de gratuité, barèmes, priorité pays), l’import CSV (`CsvRateParser`), `SendcloudMethod` (client HTTP factice, cache, filtres), le calculateur (tri, doublons, isolation des pannes) et la sélection (point relais obligatoire, prix recalculé).
 
 ## Licence
 

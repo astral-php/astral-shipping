@@ -47,24 +47,10 @@ $console->register(new ImportRatesCommand(
 
 ## Choisir un point relais (côté navigateur)
 
-Le serveur ne vérifie pas l'existence du point : il exige seulement un `pickup_point_id` non vide et le stocke avec son libellé. Le choix se fait avec le **widget officiel** de chaque transporteur (documentation Colissimo / Mondial Relay, qui peut nécessiter un identifiant d'enseigne ou un jeton selon ton contrat).
+Guide dédié (mapping champs, checklist boutique, MR + Colissimo) :
+[`docs/widgets-pickup.md`](widgets-pickup.md).
 
-Le partial `stubs/views/shipping/options.php` fournit les champs cachés à remplir :
-
-```html
-<input type="hidden" name="pickup_point_id"    id="pickup_point_id">
-<input type="hidden" name="pickup_point_label" id="pickup_point_label">
-<div id="pickup-widget"></div>
-```
-
-Dans le callback « point sélectionné » du widget, tu écris simplement :
-
-```js
-document.getElementById('pickup_point_id').value    = point.id;     // nom de champ selon le widget
-document.getElementById('pickup_point_label').value = point.label;
-```
-
-Et tu n'affiches le widget que si le bouton radio coché a `data-requires-pickup="1"` (déjà présent dans le partial). Adapte les paramètres du widget à la documentation du transporteur : ils ne sont volontairement pas codés ici.
+Résumé : le serveur exige un `pickup_point_id` non vide (pas de contrôle d’existence API). Le partial `stubs/views/shipping/options.php` fournit les champs cachés + `data-requires-pickup` ; le widget officiel du transporteur remplit ces champs.
 
 ## Port offert
 

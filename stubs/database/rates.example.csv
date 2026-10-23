@@ -1,10 +1,27 @@
 method_code,country,min_weight_g,max_weight_g,price_eur,estimated_days
+# Valeurs FICTIVES — remplace par ton contrat. Bornes inclusives (0-500 puis 501-1000).
+# Colissimo domicile — France
 colissimo_home,FR,0,500,5.20,2
 colissimo_home,FR,501,1000,6.80,2
 colissimo_home,FR,1001,2000,8.10,2
+colissimo_home,FR,2001,5000,12.50,2
+# Colissimo domicile — UE (exemples)
+colissimo_home,BE,0,1000,9.90,3
+colissimo_home,BE,1001,3000,14.50,3
+colissimo_home,DE,0,1000,10.50,3
+colissimo_home,DE,1001,3000,15.90,3
+# Colissimo point de retrait
 colissimo_pickup,FR,0,1000,4.60,3
 colissimo_pickup,FR,1001,3000,6.20,3
+colissimo_pickup,FR,3001,5000,8.90,3
+# Mondial Relay point relais
 mondial_relay,FR,0,500,3.90,3
 mondial_relay,FR,501,1000,4.90,3
 mondial_relay,FR,1001,3000,6.50,3
+mondial_relay,FR,3001,5000,8.20,3
 mondial_relay,BE,0,1000,5.50,4
+mondial_relay,BE,1001,3000,7.20,4
+mondial_relay,DE,0,1000,6.10,4
+# Mondial Relay domicile (si contrat)
+mondial_relay_home,FR,0,1000,5.90,3
+mondial_relay_home,FR,1001,3000,7.80,3

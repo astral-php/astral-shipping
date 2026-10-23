@@ -33,7 +33,7 @@ $euro     = static fn(int $cents): string => number_format($cents / 100, 2, ',',
         </label>
     <?php endforeach; ?>
 
-    <?php /* Rempli par le widget du transporteur (voir docs/colissimo-mondial-relay.md) */ ?>
+    <?php /* Rempli par le widget du transporteur (voir docs/widgets-pickup.md) */ ?>
     <input type="hidden" name="pickup_point_id" id="pickup_point_id" value="">
     <input type="hidden" name="pickup_point_label" id="pickup_point_label" value="">
     <div id="pickup-widget" class="hidden"></div>

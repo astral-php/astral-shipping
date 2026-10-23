@@ -60,4 +60,43 @@ final class TableRateMethodTest extends TestCase
 
         $this->assertSame(0, $method->quotes(Factory::context(subtotal: 6000))[0]->priceCents);
     }
+
+    public function testBelowFreeThresholdKeepsRate(): void
+    {
+        $method = new ColissimoMethod($this->table(), false, 5000);
+
+        $this->assertSame(650, $method->quotes(Factory::context(subtotal: 4999, weight: 800))[0]->priceCents);
+    }
+
+    public function testUnknownCountryWithoutWildcardYieldsNothing(): void
+    {
+        $table = new ArrayRateTable([
+            ['method' => 'colissimo_home', 'country' => 'FR', 'min_g' => 0, 'max_g' => 1000, 'price_cents' => 500],
+        ]);
+        $method = new ColissimoMethod($table);
+
+        $this->assertSame([], $method->quotes(Factory::context(weight: 500, country: 'ES')));
+    }
+
+    public function testColissimoPickupRequiresPickupPoint(): void
+    {
+        $table = new ArrayRateTable([
+            ['method' => 'colissimo_pickup', 'country' => 'FR', 'min_g' => 0, 'max_g' => 3000, 'price_cents' => 460, 'days' => 3],
+        ]);
+        $quote = (new ColissimoMethod($table, pickup: true))->quotes(Factory::context())[0];
+
+        $this->assertSame('colissimo_pickup', $quote->code);
+        $this->assertTrue($quote->requiresPickupPoint);
+    }
+
+    public function testMondialRelayHomeDoesNotRequirePickup(): void
+    {
+        $table = new ArrayRateTable([
+            ['method' => 'mondial_relay_home', 'country' => 'FR', 'min_g' => 0, 'max_g' => 3000, 'price_cents' => 590],
+        ]);
+        $quote = (new MondialRelayMethod($table, relay: false))->quotes(Factory::context())[0];
+
+        $this->assertSame('mondial_relay_home', $quote->code);
+        $this->assertFalse($quote->requiresPickupPoint);
+    }
 }
