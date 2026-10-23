@@ -52,6 +52,11 @@ Guide dédié (mapping champs, checklist boutique, MR + Colissimo) :
 
 Résumé : le serveur exige un `pickup_point_id` non vide (pas de contrôle d’existence API). Le partial `stubs/views/shipping/options.php` fournit les champs cachés + `data-requires-pickup` ; le widget officiel du transporteur remplit ces champs.
 
+## API / sandbox (hors barèmes 0.5.x)
+
+Tests étiquettes / Web Services (Compte Entreprise Colissimo, enseigne test MR `BDTEST`, `checkGenerateLabel`, etc.) :
+[`docs/api-sandbox-colissimo-mr.md`](api-sandbox-colissimo-mr.md).
+
 ## Limites transporteur (barèmes CSV — pas de constante PHP)
 
 Le package **n’encode pas** ces plafonds en dur : tu les respectes via `max_weight_g`.  

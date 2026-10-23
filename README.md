@@ -7,7 +7,8 @@ Frais de port **multi-options** pour [Astral](https://github.com/astral-php) : f
 [![Tests](https://img.shields.io/badge/tests-PHPUnit%2010%2B-9933CC)](./phpunit.xml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> **Statut : 0.5.2** — Colissimo + Mondial Relay **prêts prod barèmes**.  
+> **Statut : 0.5.3** — Colissimo + Mondial Relay **prêts prod barèmes**.  
+
 
 > Philosophie Astral : **explicite, sans magie, opt-in** — tu déclares les méthodes actives, rien n’est découvert automatiquement.  
 > Ce n’est **pas** une version 1.0 (agrégateur API) : voir [Limites](#limites-050).
@@ -120,7 +121,7 @@ Widgets relais : [`docs/widgets-pickup.md`](docs/widgets-pickup.md). Sendcloud r
 | `sendcloud` | `SendcloudMethod` | API Sendcloud (N offres, cache) | Selon l'offre |
 | *(la tienne)* | `ShippingMethodInterface` | À toi de voir | — |
 
-Pourquoi des barèmes pour Colissimo et Mondial Relay ? Parce que **tes tarifs dépendent de ton contrat** : on les saisit (ou importe en CSV) une fois, le calcul reste instantané, hors-ligne et testable. Voir [`docs/colissimo-mondial-relay.md`](docs/colissimo-mondial-relay.md) et [`docs/widgets-pickup.md`](docs/widgets-pickup.md).
+Pourquoi des barèmes pour Colissimo et Mondial Relay ? Parce que **tes tarifs dépendent de ton contrat** : on les saisit (ou importe en CSV) une fois, le calcul reste instantané, hors-ligne et testable. Voir [`docs/colissimo-mondial-relay.md`](docs/colissimo-mondial-relay.md), [`docs/widgets-pickup.md`](docs/widgets-pickup.md) et (API / sandbox, hors 0.5) [`docs/api-sandbox-colissimo-mr.md`](docs/api-sandbox-colissimo-mr.md).
 
 ## Utilisation
 

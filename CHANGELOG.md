@@ -5,6 +5,11 @@ Toutes les versions notables de ce projet sont documentées ici.
 Le format s’inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versionnage Sémantique](https://semver.org/lang/fr/).
 
+## [0.5.3] — 2026-10-23
+
+### Documenté
+- Sandbox / tests API Colissimo & Mondial Relay (`docs/api-sandbox-colissimo-mr.md`) — hors barèmes 0.5.x.
+
 ## [0.5.2] — 2026-10-23
 
 ### Documenté
