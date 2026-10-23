@@ -7,7 +7,7 @@ Frais de port **multi-options** pour [Astral](https://github.com/astral-php) : f
 [![Tests](https://img.shields.io/badge/tests-PHPUnit%2010%2B-9933CC)](./phpunit.xml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> **Statut : 0.5.1** — Colissimo + Mondial Relay **prêts prod barèmes**.  
+> **Statut : 0.5.2** — Colissimo + Mondial Relay **prêts prod barèmes**.  
 
 > Philosophie Astral : **explicite, sans magie, opt-in** — tu déclares les méthodes actives, rien n’est découvert automatiquement.  
 > Ce n’est **pas** une version 1.0 (agrégateur API) : voir [Limites](#limites-050).

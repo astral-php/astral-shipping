@@ -5,6 +5,12 @@ Toutes les versions notables de ce projet sont documentées ici.
 Le format s’inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versionnage Sémantique](https://semver.org/lang/fr/).
 
+## [0.5.2] — 2026-10-23
+
+### Documenté
+- Limites **Colissimo** : domicile **30 kg**, point retrait relais/consignes **20 kg** (bureau de poste jusqu’à 30 kg), dimensions (développé 150 cm, côté 100 cm).
+- CSV d’exemple : `colissimo_home` → 30000 g ; `colissimo_pickup` → 20000 g.
+
 ## [0.5.1] — 2026-10-23
 
 ### Documenté

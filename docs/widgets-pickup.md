@@ -84,6 +84,7 @@ Adapte `point.id` / `point.label` à la doc du widget (souvent `ID`, `Nom`, `Adr
 2. Widget / carte officielle Colissimo (espace client pro / doc « module points de retrait »).
 3. Même mapping : id point → `pickup_point_id`, libellé → `pickup_point_label`.
 4. Afficher le widget seulement si la méthode sélectionnée exige un point.
+5. Plafonds : retrait relais/consignes **20 kg** ; domicile **30 kg** ; dimensions (développé 150 cm, côté max 100 cm) — détail [`colissimo-mondial-relay.md`](colissimo-mondial-relay.md).
 
 ---
 
