@@ -68,10 +68,12 @@ Adapte `point.id` / `point.label` à la doc du widget (souvent `ID`, `Nom`, `Adr
 2. Intégrer le script / iframe fourni (paramètres : code enseigne, pays, CP…).
 3. Sur sélection : mapper l’identifiant ParcelShop → `pickup_point_id`, libellé humain → `pickup_point_label`.
 4. N’afficher le widget que si `shipping_method === mondial_relay` (ou radio `data-requires-pickup="1"`).
+5. Respecter les plafonds poids / dimensions (Point Relais **30 kg**, Lockers / IT / PL **25 kg**, développé 150 cm…) — détail dans [`colissimo-mondial-relay.md`](colissimo-mondial-relay.md). Le barème CSV doit s’arrêter à ces max.
 
 **Liens utiles** (vérifier les URLs à jour chez le transporteur) :
 
 - Documentation technique / widgets : portail partenaires Mondial Relay  
+- [Taille / poids max colis](https://www.mondialrelay.fr/faq-pro/envoyer-un-colis/quelle-est-la-taille-maximale-pour-envoyer-un-colis/)  
 - Recherche ParcelShop : API ou widget selon contrat
 
 ---

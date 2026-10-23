@@ -52,6 +52,34 @@ Guide dédié (mapping champs, checklist boutique, MR + Colissimo) :
 
 Résumé : le serveur exige un `pickup_point_id` non vide (pas de contrôle d’existence API). Le partial `stubs/views/shipping/options.php` fournit les champs cachés + `data-requires-pickup` ; le widget officiel du transporteur remplit ces champs.
 
+## Limites transporteur Mondial Relay (réf. FAQ pro)
+
+> Source : [FAQ Mondial Relay — taille / poids max](https://www.mondialrelay.fr/faq-pro/envoyer-un-colis/quelle-est-la-taille-maximale-pour-envoyer-un-colis/)  
+> À vérifier périodiquement : les règles transporteur évoluent.
+
+### Poids
+
+| Mode / destination | Poids max |
+| --- | --- |
+| Standard (Point Relais **ou** Domicile) | **30 kg** (`max_weight_g` ≤ **30000**) |
+| Lockers (consignes automatiques) | **25 kg** |
+| Italie et Pologne | **25 kg** |
+
+Le package **n’encode pas** ces plafonds en dur : tu les respectes dans ton CSV.  
+Exemple : dernière tranche `mondial_relay` / `mondial_relay_home` à `30000` → au-delà, **aucune offre** MR (comportement voulu).  
+Pour lockers / IT / PL à 25 kg : soit une grille séparée, soit `max_weight_g = 25000` sur les lignes concernées.
+
+### Dimensions (hors calcul automatique 0.5.x)
+
+| Règle | Limite |
+| --- | --- |
+| Développé (L + l + h) | **150 cm** max |
+| Plus long côté | **120 cm** max |
+| Lockers / Italie / Pologne | **64 × 41 × 38 cm** max |
+
+Astral Shipping calcule le port sur le **poids panier** (`weight_g`), pas sur le volume.  
+Le contrôle dimensions reste **marchand / entrepôt / widget** tant que les produits n’exposent pas L×l×h.
+
 ## Port offert
 
 `free_shipping_threshold_cents` dans la config s'applique aux offres de barème et au forfait (pas à Sendcloud, dont les prix viennent de l'API).

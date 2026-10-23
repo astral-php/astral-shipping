@@ -5,6 +5,12 @@ Toutes les versions notables de ce projet sont documentées ici.
 Le format s’inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versionnage Sémantique](https://semver.org/lang/fr/).
 
+## [0.5.1] — 2026-10-23
+
+### Documenté
+- Limites Mondial Relay (FAQ pro) : **30 kg** Point Relais/Domicile, **25 kg** Lockers / IT / PL ; dimensions (développé 150 cm, etc.).
+- CSV d’exemple : tranches `mondial_relay` jusqu’à **30000 g** (prix fictifs).
+
 ## [0.5.0] — 2026-10-23
 
 ### Ajouté
