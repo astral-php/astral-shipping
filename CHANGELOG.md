@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.0] — 2026-10-31
+
+### Modifié
+
+- PHP ^8.3 + astral-core ^2.1 (feuille 2.1 P7)
+
 Toutes les versions notables de ce projet sont documentées ici.
 
 Le format s’inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),

@@ -2,7 +2,7 @@
 
 Frais de port **multi-options** pour [Astral](https://github.com/astral-php) : forfait, retrait boutique, barèmes pays × poids (Colissimo / Mondial Relay), API agrégateur (Sendcloud).
 
-[![PHP](https://img.shields.io/badge/PHP-8.1%2B-777BB4?logo=php&logoColor=white)](https://www.php.net)
+[![PHP](https://img.shields.io/badge/PHP-8.3%2B-777BB4?logo=php&logoColor=white)](https://www.php.net)
 [![astral-core](https://img.shields.io/badge/astral--core-%5E1.2-4f46e5)](https://packagist.org/packages/astral-php/astral-core)
 [![Tests](https://img.shields.io/badge/tests-PHPUnit%2010%2B-9933CC)](./phpunit.xml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
