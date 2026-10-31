@@ -5,6 +5,12 @@ Toutes les versions notables de ce projet sont documentées ici.
 Le format s’inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versionnage Sémantique](https://semver.org/lang/fr/).
 
+## [0.5.4] — 2026-10-31
+
+### Modifié
+
+- `astral-php/astral-core` : **`^1.2 || ^2.1`** (débloque astral-shop 2.x / feuille 2.1 P5)
+
 ## [0.5.3] — 2026-10-23
 
 ### Documenté
